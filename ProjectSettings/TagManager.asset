@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door trigger
   - Wall run
+  - intractable
   layers:
   - Default
   - TransparentFX

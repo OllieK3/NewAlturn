@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
     Animator anim;
-
+    public Text counter;
+    public AudioSource boom;
     [Header("Gun Settings")]
     public float fireRate = 1;
     public int clipSize = 30;
     public int reservedAmmoCapacity = 270;
+    
 
     //Variables that change throughout the code
     bool _canShoot;
@@ -37,6 +39,7 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
+        counter.text = $"{_currentAmmoInClip}/{_ammoInReserve}";
         DetermineAim();
         if(Input.GetMouseButtonDown(0) &&_canShoot && _currentAmmoInClip > 0)
         {
@@ -45,6 +48,7 @@ public class GunController : MonoBehaviour
             _canShoot = false;
             _currentAmmoInClip--;
             StartCoroutine(ShootGun());
+            boom.Play(0);
         }
         else if (Input.GetKeyDown(KeyCode.R) && _currentAmmoInClip < clipSize && _ammoInReserve > 0)
         {

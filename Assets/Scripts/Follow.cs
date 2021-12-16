@@ -6,10 +6,26 @@ public class Follow : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent Enemy;
     public Transform Player;
-
-    private void Update()
+    public float TriggerDistance;
+    public float hittingdistance;
+    public float walkanimstartspeed;
+    public Animator anim;
+    void Update()
     {
-        Enemy.SetDestination(Player.position);
+        if (Vector3.Distance(transform.position, Player.transform.position) < TriggerDistance)
+        {
+            Enemy.SetDestination(Player.position);
+            anim.SetBool("walk", true);
+        }
+
+        if(Vector3.Distance(transform.position, Player.transform.position) < hittingdistance)
+        {
+            anim.SetBool("swing", true);
+        }
+        else
+        {
+            anim.SetBool("swing", false);
+        }
     }
 
 }
